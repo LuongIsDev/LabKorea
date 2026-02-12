@@ -1,0 +1,177 @@
+/* Import font phải ở đầu file */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 225 50% 8%;
+    --foreground: 210 40% 95%;
+
+    --card: 225 40% 12%;
+    --card-foreground: 210 40% 95%;
+
+    --popover: 225 40% 14%;
+    --popover-foreground: 210 40% 95%;
+
+    --primary: 185 80% 45%;
+    --primary-foreground: 225 50% 8%;
+
+    --secondary: 225 30% 18%;
+    --secondary-foreground: 210 40% 90%;
+
+    --muted: 225 25% 16%;
+    --muted-foreground: 215 20% 55%;
+
+    --accent: 185 70% 40%;
+    --accent-foreground: 225 50% 8%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 210 40% 98%;
+
+    --success: 152 70% 45%;
+    --success-foreground: 225 50% 8%;
+
+    --warning: 38 92% 55%;
+    --warning-foreground: 225 50% 8%;
+
+    --late: 25 95% 55%;
+    --late-foreground: 225 50% 8%;
+
+    --border: 225 25% 20%;
+    --input: 225 25% 20%;
+    --ring: 185 80% 45%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 225 40% 10%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-primary: 185 80% 45%;
+    --sidebar-primary-foreground: 225 50% 8%;
+    --sidebar-accent: 225 30% 16%;
+    --sidebar-accent-foreground: 210 40% 90%;
+    --sidebar-border: 225 25% 18%;
+    --sidebar-ring: 185 80% 45%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(185 80% 45%), hsl(200 85% 55%));
+    --gradient-card: linear-gradient(145deg, hsl(225 40% 13%), hsl(225 40% 10%));
+    --gradient-success: linear-gradient(135deg, hsl(152 70% 45%), hsl(165 75% 40%));
+    --gradient-danger: linear-gradient(135deg, hsl(0 72% 55%), hsl(15 80% 50%));
+    --gradient-warning: linear-gradient(135deg, hsl(38 92% 55%), hsl(25 95% 55%));
+    --shadow-glow: 0 0 30px -5px hsl(185 80% 45% / 0.3);
+    --shadow-card: 0 4px 24px -4px hsl(225 50% 4% / 0.5);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50 rounded-xl;
+    box-shadow: var(--shadow-card);
+  }
+
+  .glow-border {
+    @apply border border-primary/30;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .status-present {
+    background: hsl(var(--success) / 0.2);
+    color: hsl(var(--success));
+    border: 1px solid hsl(var(--success) / 0.3);
+  }
+
+  .status-absent {
+    background: hsl(var(--destructive) / 0.2);
+    color: hsl(var(--destructive));
+    border: 1px solid hsl(var(--destructive) / 0.3);
+  }
+
+  .status-late {
+    background: hsl(var(--late) / 0.2);
+    color: hsl(var(--late));
+    border: 1px solid hsl(var(--late) / 0.3);
+  }
+
+  .pulse-dot {
+    @apply relative;
+  }
+  .pulse-dot::before {
+    content: '';
+    @apply absolute inset-0 rounded-full animate-ping;
+    background: inherit;
+    opacity: 0.4;
+  }
+
+  .check-in-btn {
+    background: var(--gradient-success);
+    @apply text-success-foreground font-semibold shadow-lg;
+    box-shadow: 0 4px 20px -4px hsl(152 70% 45% / 0.4);
+    transition: all 0.3s ease;
+  }
+  .check-in-btn:hover {
+    box-shadow: 0 6px 28px -4px hsl(152 70% 45% / 0.6);
+    transform: translateY(-1px);
+  }
+
+  .check-out-btn {
+    background: var(--gradient-danger);
+    @apply text-destructive-foreground font-semibold shadow-lg;
+    box-shadow: 0 4px 20px -4px hsl(0 72% 55% / 0.4);
+    transition: all 0.3s ease;
+  }
+  .check-out-btn:hover {
+    box-shadow: 0 6px 28px -4px hsl(0 72% 55% / 0.6);
+    transform: translateY(-1px);
+  }
+}
+
+@layer utilities {
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out;
+  }
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out;
+  }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
